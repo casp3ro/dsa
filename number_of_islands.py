@@ -1,9 +1,8 @@
 from collections import deque
-from typing import List
 
 # O(m * n)
 
-def number_of_islands(grid: List[List[str]]) -> int:
+def number_of_islands(grid: list[list[str]]) -> int:
     directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
     visited = set()
     queue = deque()
