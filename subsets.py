@@ -1,3 +1,5 @@
+
+# O(n * (2^n))
 def subsets(nums: list[int]) -> list[int]:
     output = []
     subsets = []
