@@ -1,9 +1,3 @@
-#  TODO
-#  value_n_from_end(n) - returns the value of the node at the nth position from the end of the list
-#  reverse() - reverses the list
-#  remove_value(value) - removes the first item in the list with this value
-
-
 class Node:
     def __init__(self,value:int,next: 'Node'= None):
         self.value = value
@@ -12,7 +6,7 @@ class Node:
 class LinkedList:
     def __init__(self, head: Node = None):
         self.head = head
-        if head is not None:
+        if head:
             self.size = 1
         else:
             self.size = 0
@@ -29,7 +23,7 @@ class LinkedList:
         curr_index = 0
         curr = self.head
         
-        while curr is not None:
+        while curr:
             if curr_index == index:
                 return curr.value
             
@@ -77,7 +71,7 @@ class LinkedList:
             self.size -=1
             return last.value
         
-        while last.next is not None:
+        while last.next:
             pre_last = last
             last = last.next
 
@@ -109,28 +103,24 @@ class LinkedList:
     
     # get the value of the end item
     def back(self):
-        
         curr = self.head
         
-        while curr.next is not None:
+        while curr.next:
             curr = curr.next
             
         return curr.value
     
     # insert value at index, so the current item at that index is pointed to by the new item at the index
     def insert(self,index,value):
-        if self.empty() or index >= self.size or index < 0:
+        if self.empty() or index < 0 or index > self.size:
+
             return None
         
         curr = self.head
         counter = 0
         
         if index == 0:
-            new_node = Node(value)
-            new_node.next = self.head
-            self.head = new_node
-            
-            self.size +=1
+            self.push_front(value)
             return
             
         
@@ -148,7 +138,7 @@ class LinkedList:
     # removes node at given index    
     def erase(self,index):
         if index < 0 or index >= self.size or self.empty():
-            return None
+            return 
         
         curr = self.head
         counter = 0
@@ -164,6 +154,73 @@ class LinkedList:
             
         curr.next = curr.next.next
         self.size -= 1
+        
+    # removes the first item in the list with this value
+    def remove_value(self,value):
+        if self.empty():
+            return 
+        
+        if self.head.value == value:
+            self.head = self.head.next
+            self.size-=1
+            return
+        
+        curr = self.head
+        
+        while curr.next:
+            if curr.next.value == value:
+                curr.next = curr.next.next
+                self.size-=1
+                return
+            
+            curr = curr.next
+
+   # reverses the list         
+    def reverse(self):
+        if self.empty():
+            return
+        
+        curr = self.head
+        prev = None
+        
+        while curr:
+            
+            old_next = curr.next
+            
+            curr.next = prev 
+            
+            prev = curr
+    
+            curr = old_next
+            
+        self.head = prev
+       
+    # returns the value of the node at the nth position from the end of the list     
+    def value_n_from_end(self,n):
+        if n < 0 or n >= self.size:
+            return None
+
+        curr = self.head
+        nNode = self.head
+        
+        for _ in range(n):
+            if nNode is None:
+                return
+            nNode= nNode.next
+            
+        while nNode:
+            curr = curr.next
+            nNode = nNode.next
+            
+        return curr.value
+            
+        
+        
+            
+
+            
+
+                
             
         
 
