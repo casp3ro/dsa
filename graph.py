@@ -29,6 +29,7 @@ class Graph:
     def dfs_adjacency(self,graph,node,visited = None):
         if not visited:
             visited = set()
+
         if node in visited:
             return
         
