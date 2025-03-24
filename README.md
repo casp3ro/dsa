@@ -1,1 +1,1 @@
-## Data Structures & Algorithms in Python with coding solutions
+## Data Structures and Algorithms in Python with Code Solutions
