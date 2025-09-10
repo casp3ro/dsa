@@ -1,4 +1,16 @@
 def max_area_of_island(grid: list[list[int]]) -> int:
+    """
+    Finds the maximum area of an island in a 2D grid using DFS.
+    
+    Interview Tips:
+    - Use DFS to explore each connected component (island)
+    - Mark visited cells to avoid revisiting
+    - Count cells in each island and track maximum
+    - Check all 4 directions from each cell
+    - Key insight: each DFS call explores one complete island
+    
+    Complexity: O(m*n) time, O(m*n) space
+    """
     rows_len, cols_len = len(grid), len(grid[0])
     directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
     max_area = 0
@@ -28,3 +40,16 @@ def max_area_of_island(grid: list[list[int]]) -> int:
                 max_area = max(max_area, counter)
 
     return max_area
+
+
+def test_max_area_of_island():
+    """Test function that can be run from terminal."""
+    # Test: Grid with islands, max area = 6
+    grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,1,1,0,1,0,0,0,0,0,0,0,0],[0,1,0,0,1,1,0,0,1,0,1,0,0],[0,1,0,0,1,1,0,0,1,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,1,1,0,0,0,0]]
+    result = max_area_of_island(grid)
+    print(f"Grid has multiple islands")
+    print(f"Maximum island area: {result}")
+
+
+if __name__ == "__main__":
+    test_max_area_of_island()

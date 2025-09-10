@@ -1,4 +1,16 @@
 def minimum_window_substring(s: str, t: str) -> str:
+    """
+    Finds the minimum window substring containing all characters of t using sliding window.
+    
+    Interview Tips:
+    - Use sliding window with two pointers
+    - Track character counts in both strings
+    - Expand right until all characters found
+    - Contract left while maintaining all characters
+    - Key insight: track "have" vs "need" to know when window is valid
+    
+    Complexity: O(|s| + |t|) time, O(|s| + |t|) space
+    """
     if t == '':
         return ''
 
@@ -34,3 +46,17 @@ def minimum_window_substring(s: str, t: str) -> str:
     if resLen == float("infinity"):
         return ''
     return s[l: r + 1]
+
+
+def test_minimum_window_substring():
+    """Test function that can be run from terminal."""
+    # Test: s="ADOBECODEBANC", t="ABC" -> "BANC"
+    s = "ADOBECODEBANC"
+    t = "ABC"
+    result = minimum_window_substring(s, t)
+    print(f"String: '{s}', Target: '{t}'")
+    print(f"Minimum window: '{result}'")
+
+
+if __name__ == "__main__":
+    test_minimum_window_substring()
