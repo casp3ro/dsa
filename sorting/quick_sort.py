@@ -1,73 +1,26 @@
-def quick_sort(data: list) -> list:
-    """
-    Sorts an array using the Quick Sort algorithm (Divide and Conquer).
-    
-    How it works:
-    1. Choose a pivot element (middle element in this implementation)
-    2. Partition: Rearrange array so elements < pivot are on left, > pivot on right
-    3. Recursively sort the left and right subarrays
-    4. Combine: The array is now sorted
-    
-    Time Complexity: 
-    - Average Case: O(n log n) - good pivot selection
-    - Best Case: O(n log n) - balanced partitions
-    - Worst Case: O(n²) - when pivot is always min/max element
-    
-    Space Complexity: O(log n) - recursion stack depth
-    
-    Advantages:
-    - Fast in practice (often faster than merge sort)
-    - Sorts in place (with some implementations)
-    - Cache-friendly
-    
-    Disadvantages:
-    - Worst case O(n²) time complexity
-    - Not stable (relative order of equal elements may change)
-    - Performance depends on pivot selection
-    """
-    # Base case: arrays with 0 or 1 element are already sorted
-    if len(data) <= 1:
-        return data
-    
-    # Choose pivot (middle element for better average performance)
-    pivot_value = data[len(data) // 2]
+def partition(arr, low, high):
+    pivot = arr[high]
+    i = low - 1
 
-    # Partition array around pivot
-    smaller, middle, larger = partition(data, pivot_value)
-    
-    # Recursively sort smaller and larger parts, then combine
-    return quick_sort(smaller) + middle + quick_sort(larger)
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            i += 1
+            arr[j], arr[i] = arr[i], arr[j]
 
+    pivot_index = i + 1
+    arr[pivot_index], arr[high] = arr[high], arr[pivot_index]
+    return pivot_index
 
-def partition(data: list, pivot_value: int) -> tuple[list, list, list]:
-    """
-    Partitions array into three parts based on pivot value.
-    
-    How it works:
-    1. Create three lists: smaller, middle, larger
-    2. Compare each element with pivot
-    3. Place element in appropriate list based on comparison
-    
-    Time Complexity: O(n) - single pass through array
-    Space Complexity: O(n) - for the three new lists
-    
-    Returns:
-        tuple: (smaller_elements, equal_elements, larger_elements)
-    """
-    smaller = []
-    middle = []
-    larger = []
-    
-    # Partition elements based on pivot comparison
-    for item in data:
-        if item < pivot_value:
-            smaller.append(item)
-        elif item > pivot_value:
-            larger.append(item)
-        else:  # item == pivot_value
-            middle.append(item)
-            
-    return smaller, middle, larger
+def quick_sort(arr, low=0, high=None):
+    if high is None:
+        high = len(arr) - 1
+    if len(arr) == 0:
+        return arr
+    if low < high:
+        pivot_index = partition(arr, low, high)
+        quick_sort(arr, low, pivot_index - 1)
+        quick_sort(arr, pivot_index + 1, high)
+    return arr
 
 
 def test_quick_sort():
