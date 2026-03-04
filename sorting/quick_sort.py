@@ -1,15 +1,15 @@
 def partition(arr, low, high):
     pivot = arr[high]
-    i = low - 1
+    partition_index = low 
 
-    for j in range(low, high):
-        if arr[j] <= pivot:
-            i += 1
-            arr[j], arr[i] = arr[i], arr[j]
+    for i in range(low, high):
+        if arr[i] <= pivot:
+            arr[partition_index], arr[i] = arr[i], arr[partition_index]
+            partition_index += 1
 
-    pivot_index = i + 1
-    arr[pivot_index], arr[high] = arr[high], arr[pivot_index]
-    return pivot_index
+    arr[partition_index], arr[high] = arr[high], arr[partition_index]
+    
+    return partition_index
 
 def quick_sort(arr, low, high):
 
